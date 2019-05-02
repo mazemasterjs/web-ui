@@ -15,7 +15,7 @@
       data() {
           return {
               title: 'Test App',
-              message: "It's working pretty well so far...",
+              message: 'Working pretty well so far...',
           };
       },
   };
