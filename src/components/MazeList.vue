@@ -4,10 +4,10 @@
 
     <v-list v-if="error === ''" two-line>
       <template v-for="maze in mazes">
-        <v-list-tile :key="maze.id + '-tile'" avatar>
-          <v-list-tile-avatar :key="maze.id" class="mazeThumbnail">
-            <pre>{{maze.textRender}}</pre>
-          </v-list-tile-avatar>
+        <v-list-tile :key="maze.id + '-tile'" im>
+          <v-list-tile :key="maze.id" class="testing">
+            <img src="../assets/maze_32x32.png" class="mazeThumbnail">
+          </v-list-tile>
 
           <v-list-tile-content :key="maze.id + '-content'">
             <v-list-tile-title v-html="maze.name"></v-list-tile-title>
@@ -61,8 +61,19 @@ export default {
     border: solid 1px darkslategray;
 }
 
+.testing {
+    border: solid 1px green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
 .mazeThumbnail {
-    text-align: center;
-    font-size: calc(0vw + 0vh + 1vmin);
+    border: solid 1px red;
+    flex-shrink: 0;
+    height: 100%;
+    width: 100%;
+    /*    font-size: calc(0vw + 0vh + 1vmin); */
 }
 </style>
