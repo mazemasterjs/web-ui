@@ -4,7 +4,8 @@
       <Header/>
       <v-content>
         <MazeList/>
-        <!--<ServiceViewer/>-->
+        <!-- <ServiceViewer/> -->
+         <!-- <MazeImage/> -->
       </v-content>
     </v-container>
   </v-app>
@@ -14,6 +15,7 @@
 import Header from './components/Header';
 import MazeList from './components/MazeList';
 import ServiceViewer from './components/ServiceViewer';
+//import MazeImage from './components/MazeImage'; 
 
 export default {
     name: 'Home',
