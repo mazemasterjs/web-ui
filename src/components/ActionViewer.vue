@@ -80,7 +80,7 @@
         },
         computed: {
             actionColor() {
-                if (this.action.action == 'MOVE') {
+                if (this.action.action === 'MOVE') {
                     return '#196719';
                 } else {
                     return null;
@@ -102,8 +102,3 @@
         },
     };
 </script>
-
-<style lang="scss">
-    .ActionViewer {
-    }
-</style>

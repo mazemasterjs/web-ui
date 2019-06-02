@@ -63,7 +63,7 @@
                     case GAME_STATES.FINISHED:
                     case GAME_STATES.ABORTED:
                     case GAME_STATES.ERROR:
-                    default: return '#696969'
+                    default: return '#696969';
                 }
             },
             getMazeDetails(maze) {
@@ -103,47 +103,47 @@
                 MazeService.GenerateMaze(5, 5, 1, 'test', 'abc')
                 .then(
                     (maze) => {
-                    const tmpLoc = {
-                        row: maze.startCell.row,
-                        col: maze.startCell.col,
-                    };
+                        const tmpLoc = {
+                            row: maze.startCell.row,
+                            col: maze.startCell.col,
+                        };
 
-                    const actions = new Array();
-                    actions.push(this.createMoveAction(DIRS.NONE, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.NORTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
-                    actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        const actions = new Array();
+                        actions.push(this.createMoveAction(DIRS.NONE, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.NORTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.EAST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.WEST, tmpLoc));
+                        actions.push(this.createMoveAction(DIRS.SOUTH, tmpLoc));
 
-                    const game = {
-                        id: 'Test Game',
-                        state: GAME_STATES.NEW,
-                        maze: maze,
-                        mode: GAME_MODES.SINGLE_PLAYER,
-                        score: null,
-                        player: null,
-                        actions: actions,
-                        round: 0,
-                        teamId: 'teamsters',
-                        botId: 'Roomba',
-                        lastAccessed: 0,
-                    };
-                    
-                    this.gameList = new Array();
-                    this.gameList.push(game);
-                },
-                (err) => this.$emit('on-error', err)
+                        const game = {
+                            id: 'Test Game',
+                            state: GAME_STATES.NEW,
+                            maze,
+                            mode: GAME_MODES.SINGLE_PLAYER,
+                            score: null,
+                            player: null,
+                            actions,
+                            round: 0,
+                            teamId: 'teamsters',
+                            botId: 'Roomba',
+                            lastAccessed: 0,
+                        };
+
+                        this.gameList = new Array();
+                        this.gameList.push(game);
+                    },
+                    (err) => this.$emit('on-error', err),
                 );
-            }
+            },
         },
         computed: {
             currentPageIndex() {
@@ -154,7 +154,7 @@
             },
             currentGames() {
                 const pageStart = this.currentPageIndex * GAMES_PER_PAGE;
-                const pageEnd = Math.min(pageStart + GAMES_PER_PAGE, this.gameList.length)
+                const pageEnd = Math.min(pageStart + GAMES_PER_PAGE, this.gameList.length);
 
                 return this.gameList.slice(pageStart, pageEnd);
             },
@@ -168,9 +168,6 @@
 
 <style lang="scss">
     .GameList {
-        .GameTitle {
-
-        }
         .GameDetails {
             display: flex;
             flex-direction: column;

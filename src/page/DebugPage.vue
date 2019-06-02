@@ -21,13 +21,6 @@ const log = Logger.getInstance();
 
 export default {
     name: 'DebugPage',
-    data() {
-      return {};
-    },
-    components: {},
-    methods: {
-    },
-    created() {},
 };
 </script>
 

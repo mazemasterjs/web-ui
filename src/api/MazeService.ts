@@ -1,5 +1,6 @@
 import Service from '@mazemasterjs/shared-library/Service';
 import MazeBase from '@mazemasterjs/shared-library/MazeBase';
+import IMazeStub from '@mazemasterjs/shared-library/IMazeStub';
 
 import axios from 'axios';
 import Logger from '@mazemasterjs/logger';
@@ -15,7 +16,7 @@ export default {
         .then(
             (res) => {
                 log.debug('MazeService.ts', 'GetServiceDetails()', 'Success.');
-                
+
                 const service: Service = new Service();
                 service.loadFromJson(res.data);
                 return service;
@@ -39,7 +40,7 @@ export default {
         .then(
             (res) => {
                 log.debug('MazeService.ts', 'GenerateMaze()', 'Success.');
-                let maze: MazeBase = new MazeBase();
+                const maze: MazeBase = new MazeBase();
                 maze.loadData(res.data);
                 return maze;
             },
@@ -49,7 +50,7 @@ export default {
             },
         );
     },
-    GetAllMazes(): Promise<MazeBase> {
+    GetAllMazes(): Promise<IMazeStub> {
         const query: string = process.env.VUE_APP_API_MAZE_URL + '/get/all';
 
         return axios.get(query)
@@ -58,14 +59,20 @@ export default {
                 log.debug('MazeService.ts', 'GetAllMazes()', 'Success.');
 
                 return res.data.map((mazeDat: any) => {
-                    let maze: MazeBase = new MazeBase();
-                    maze.loadData(mazeDat);
+                    const maze: IMazeStub = {
+                        id: mazeDat.id,
+                        height: mazeDat.height,
+                        width: mazeDat.width,
+                        challenge: mazeDat.challenge,
+                        name: mazeDat.name,
+                        seed: mazeDat.seed,
+                        note: mazeDat.note,
+                        lastUpdated: mazeDat.lastUpdated,
+                    };
+                    //const maze: MazeBase = new MazeBase();
+                    //maze.loadData(mazeDat);
                     return maze;
                 });
-
-                //const mazes: Array<Maze> = new Array<Maze>();
-                //res.data.forEach((maze: any) => mazes.push(new Maze(maze)));
-                //return mazes;
             },
             (err) => {
                 log.error('MazeService.ts', 'GetAllMazes()', 'Error ->', err);

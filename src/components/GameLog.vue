@@ -54,7 +54,7 @@
             gameState: {type: Object, required: true},
         },
         components: {
-            ActionViewer
+            ActionViewer,
         },
         data() {
             return {
@@ -64,7 +64,7 @@
         },
         methods: {
             colorForAction(action) {
-                if (action.action == 'MOVE') {
+                if (action.action === 'MOVE') {
                     return '#196719';
                 } else {
                     return null;
@@ -99,7 +99,7 @@
             },
             displayActions() {
                 const pageStart = this.currentPageIndex * ACTIONS_PER_PAGE;
-                const pageEnd = Math.min(pageStart + ACTIONS_PER_PAGE, this.currentActions.length)
+                const pageEnd = Math.min(pageStart + ACTIONS_PER_PAGE, this.currentActions.length);
 
                 return this.currentActions.slice(pageStart, pageEnd);
             },

@@ -25,7 +25,7 @@
         props: {
             maze: {type: Object, required: true},
             botLocation: {type: Object, required: true},
-            cellSize: {type: String, required: false, default: '30px'}
+            cellSize: {type: String, required: false, default: '30px'},
         },
     };
 </script>

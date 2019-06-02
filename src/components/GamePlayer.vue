@@ -121,20 +121,16 @@
                     window.clearTimeout(this.tickTimer);
                 }
             },
-
-            loadGame() {
-
-            },
         },
         computed: {
             currentAction() {
                 return this.game.actions[this.gameState.actionNumber];
             },
             gameType() {
-                if (this.game.mode == GAME_MODES.SINGLE_PLAYER) {
-                    return "Singleplayer";
+                if (this.game.mode === GAME_MODES.SINGLE_PLAYER) {
+                    return 'Singleplayer';
                 } else if (this.game.mode === GAME_MODES.MULTI_PLAYER) {
-                    return "Multiplayer";
+                    return 'Multiplayer';
                 } else {
                     return this.game.mode;
                 }
@@ -151,7 +147,6 @@
             },
         },
         mounted() {
-            this.loadGame();
             this.setupTickTimer();
         },
         destroyed() {

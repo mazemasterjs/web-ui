@@ -28,7 +28,7 @@
             maze: {type: Object, required: true},
             cell: {type: Object, required: true},
             botLocation: {type: Object, required: true},
-            size: {type: String, required: true}
+            size: {type: String, required: true},
         },
         computed: {
             cellClasses() {
