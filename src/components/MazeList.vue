@@ -22,8 +22,8 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import Logger, { LOG_LEVELS } from '@mazemasterjs/logger';
+  import MazeService from '../api/MazeService.ts';
+  import Logger from '@mazemasterjs/logger';
 
   // configure logger
   const log = Logger.getInstance();
@@ -39,18 +39,13 @@
       },
       methods: {},
       mounted() {
-          const apiUrl = process.env.VUE_APP_API_MAZE_URL + '/get/all';
-          log.debug(__filename, 'getMazes()', 'Mounted.');
-          axios
-              .get(apiUrl)
-              .then((res) => {
-                  log.debug(__filename, 'getMazes()', res.data.length + ' Mazes returned.');
-                  this.mazes = res.data;
-              })
-              .catch((err) => {
-                  log.error(__filename, 'getMazeListData().catch()', 'Error ->', err);
-                  this.error = err.message + ' from ' + apiUrl;
-              });
+        log.debug(__filename, 'getMazes()', 'Mounted.');
+
+        MazeService.GetAllMazes()
+        .then(
+          (mazes) => this.mazes = mazes,
+          (err) => this.$emit('on-error', err),
+        );
       },
   };
 </script>

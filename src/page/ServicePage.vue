@@ -1,6 +1,6 @@
 <template>
   <v-container dark>
-    <ServiceViewer/>
+    <ServiceViewer @on-error="onError"/>
   </v-container>
 </template>
 
@@ -8,10 +8,15 @@
 import ServiceViewer from '../components/ServiceViewer.vue';
 
 export default {
-    name: 'ServicePage',
-    components: {
-        ServiceViewer,
+  name: 'ServicePage',
+  components: {
+      ServiceViewer,
+  },
+  methods: {
+    onError(err) {
+      this.$emit('on-error', err);
     },
+  },
 };
 </script>
 
