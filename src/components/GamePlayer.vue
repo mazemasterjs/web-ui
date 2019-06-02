@@ -10,34 +10,36 @@
                     </v-btn>
                 </v-toolbar-items>
             </v-toolbar>
-            <div class="FlowLayout" style="margin-top: 5px">
-                <div class="SectionFrame" style="width: 60%">
-                    <div class="Section">
-                        <live-maze-viewer
-                            :maze="game.maze"
-                            :botLocation="currentAction.location"
-                            :cell-size="mazeCellSize"
-                        />
+            <div style="margin-top: 5px; display: flex; flex-direction: row">
+                <div style="width: 70%">
+                    <div class="SectionFrame">
+                        <div class="Section">
+                            <live-maze-viewer
+                                :maze="game.maze"
+                                :botLocation="currentAction.location"
+                                :cell-size="mazeCellSize"
+                            />
+                        </div>
+                    </div>
+                    <div class="SectionFrame">
+                        <div class="Section">
+                            <game-controls
+                                :gameState="gameState"
+                                :game="game"
+                                @set-speed="onSetSpeed"
+                                @set-paused="onSetPaused"
+                                @step="onStep"
+                                @reset="onReset"
+                            />
+                        </div>
                     </div>
                 </div>
-                <div class="SectionFrame" style="width: 40%">
+                <div class="SectionFrame" style="width: 30%">
                     <div class="Section">
                         <game-log
                             :actions="game.actions"
                             :gameState="gameState"
                             style="width: 100%; height: 100%;"
-                        />
-                    </div>
-                </div>
-                <div class="SectionFrame" style="width: 100%">
-                    <div class="Section">
-                        <game-controls
-                            :gameState="gameState"
-                            :game="game"
-                            @set-speed="onSetSpeed"
-                            @set-paused="onSetPaused"
-                            @step="onStep"
-                            @reset="onReset"
                         />
                     </div>
                 </div>
@@ -143,7 +145,7 @@
 
                 const pixelsPerCell = Math.ceil(50.0 * pixelScale);
 
-                return Math.max(10, Math.min(pixelsPerCell, 50)) + 'px';
+                return Math.max(Math.min(pixelsPerCell, 50), 12);
             },
         },
         mounted() {

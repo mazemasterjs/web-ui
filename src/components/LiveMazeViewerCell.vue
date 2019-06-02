@@ -28,7 +28,7 @@
             maze: {type: Object, required: true},
             cell: {type: Object, required: true},
             botLocation: {type: Object, required: true},
-            size: {type: String, required: true},
+            size: {type: Number, required: true},
         },
         computed: {
             cellClasses() {
@@ -46,8 +46,8 @@
             },
             cellStyle() {
                 return {
-                    width: this.size,
-                    height: this.size,
+                    width: this.size + 'px',
+                    height: this.size+ 'px',
                 };
             },
             isEnter() {
@@ -84,7 +84,7 @@
                 return null;
             },
             iconSize() {
-                return ((this.size * 2.0) / 3.0) + 'px';
+                return ((this.size * 3.0) / 4.0) + 'px';
             },
         },
     };

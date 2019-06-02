@@ -14,22 +14,24 @@
                 avatar
                 @click="showAction(action)"
             >
-                <v-list-tile-avatar>
-                    <v-chip small :color="colorForAction(action)">
-                        {{ action.action }}
-                    </v-chip>
-                </v-list-tile-avatar>
+                <template v-if="action">
+                    <v-list-tile-avatar>
+                        <v-chip small :color="colorForAction(action)">
+                            {{ action.action }}
+                        </v-chip>
+                    </v-list-tile-avatar>
 
-                <v-list-tile-content>
-                    <div class="LogDetails">
-                        <div>Direction: {{ translateDirection(action.direction)}}</div>
-                        <div>Location: {{ translateLocation(action.location) }}</div>
-                    </div>
-                </v-list-tile-content>
+                    <v-list-tile-content>
+                        <div class="LogDetails">
+                            <div>Direction: {{ translateDirection(action.direction)}}</div>
+                            <div>Location: {{ translateLocation(action.location) }}</div>
+                        </div>
+                    </v-list-tile-content>
 
-                <v-list-tile-action>
-                    <v-chip small color="#6b1414" v-if="n === 0">Latest</v-chip>
-                </v-list-tile-action>
+                    <v-list-tile-action>
+                        <v-chip small color="#6b1414" v-if="n === 0">Latest</v-chip>
+                    </v-list-tile-action>
+                </template>
             </v-list-tile>
         </v-list>
         <br/>
@@ -45,13 +47,12 @@
     import { DIRS } from '@mazemasterjs/shared-library/Enums';
     import ActionViewer from './ActionViewer.vue';
 
-    const ACTIONS_PER_PAGE = 7;
-
     export default {
         name: 'GameLog',
         props: {
             actions: {type: Array, required: true},
             gameState: {type: Object, required: true},
+            pageSize: {type: Number, default: 10},
         },
         components: {
             ActionViewer,
@@ -98,13 +99,13 @@
                 return this.actions.slice(0, this.gameState.actionNumber + 1).reverse();
             },
             displayActions() {
-                const pageStart = this.currentPageIndex * ACTIONS_PER_PAGE;
-                const pageEnd = Math.min(pageStart + ACTIONS_PER_PAGE, this.currentActions.length);
+                const pageStart = this.currentPageIndex * this.pageSize;
+                const pageEnd = Math.min(pageStart + this.pageSize, this.currentActions.length);
 
                 return this.currentActions.slice(pageStart, pageEnd);
             },
             pageCount() {
-                return Math.ceil(this.currentActions.length / ACTIONS_PER_PAGE);
+                return Math.ceil(this.currentActions.length / this.pageSize);
             },
             currentPageIndex() {
                 return this.currentPage - 1;
