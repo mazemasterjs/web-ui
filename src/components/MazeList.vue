@@ -114,8 +114,6 @@ import ActivityMonitorVue from './ActivityMonitor.vue';
       /*    font-size: calc(0vw + 0vh + 1vmin); */
   }
 
-
-
   /* Dropdown Button */
 .dropbtn {
   background-color: #4CAF50;
