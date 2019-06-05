@@ -35,20 +35,9 @@
 
 
 <script>
-import axios from 'axios';
-
 export default {
-    activityMonitor: '#activityMonitor',
-    //props are passed down from mazeList to mazeImage (parent component to this, child, component)
-    props: {
-    //this is where data to be passed down goes
-  },
-      data() {
-          return {
-              //add any data here you want that just needs to be accessed in this component Or passed to a child
-          };
-      },   
-}
+    name: 'ActivityMonitor',
+};
 
 </script>
 

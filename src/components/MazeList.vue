@@ -25,8 +25,8 @@
 </div>
       <!-- this below sends the mazeName, mazeImage, etc. to the mazeImage component -->
       <div id="mazeContainer">
-      <maze-image :mazeId="mazeId" :mazeName="mazeName" :mazeImage="mazeImage"></maze-image>
-      <activity-monitor></activity-monitor>
+      <maze-image :mazeId="mazeId" :mazeName="mazeName" :mazeImage="mazeImage"/>
+      <activity-monitor/>
       </div>
     </v-list>
     <span class="error" v-else>{{error}}</span>
@@ -34,61 +34,55 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import Logger, { LOG_LEVELS } from '@mazemasterjs/logger';
+  import MazeService from '../api/MazeService.ts';
+  import Logger from '@mazemasterjs/logger';
   import MazeImage from './MazeImage.vue';
   import ActivityMonitor from './ActivityMonitor.vue';
-import ActivityMonitorVue from './ActivityMonitor.vue';
 
   // configure logger
   const log = Logger.getInstance();
 
   export default {
       name: 'MazeList',
-      data: function () {
-          return {
-              mazes: [],
-              error: '',
-              title: 'Maze List',
-              mazeId: '3:5:7:TestMazeSeed',
-              mazeName: 'Test Maze Seed',
-              mazeImage: '',
-              height: '',
-              width: '',
-              challenge: '',
-              seed: ''
-          };
+      data() {
+        return {
+            mazes: [],
+            error: '',
+            title: 'Maze List',
+            mazeId: '3:5:7:TestMazeSeed',
+            mazeName: 'Test Maze Seed',
+            mazeImage: '',
+            height: '',
+            width: '',
+            challenge: '',
+            seed: '',
+        };
       },
       methods: {
         //this method is an api call that's executed when the corresponding maze button in the Maze List is pressed
-      getMazeImage(height, width, challenge, seed, mazeName) {
-          console.log('hellooooooo  '+ height + width + challenge + seed + mazeName)
-          axios
-            .get(process.env.VUE_APP_API_MAZE_URL + '/generate/' + height + '/' + width+ '/' + challenge + '/'+ seed + '/'+ mazeName)
-            .then(res => (this.mazeImage = res.data.textRender))
-            .catch((err) => (console.log(err)))
-         }
+        getMazeImage(height, width, challenge, seed, mazeName) {
+          console.log('hellooooooo  '+ height + width + challenge + seed + mazeName);
+
+          MazeService.GenerateMaze(width, height, challenge, mazeName, seed)
+          .then(
+            (maze) => (this.mazeImage = maze.textRender),
+            (err) => this.$emit('on-error', err),
+          );
+        },
       },
       mounted() {
-          const apiUrl = process.env.VUE_APP_API_MAZE_URL + '/get/';
-          log.debug(__filename, 'getMazes()', 'Mounted.');
-          axios
-              .get(apiUrl)
-              .then((res) => {
-                  log.debug(__filename, 'getMazes()', res.data.length + ' Mazes returned.');
-                  this.mazes = res.data;
-              })
-              .catch((err) => {
-                  log.error(__filename, 'getMazeListData().catch()', 'Error ->', err);
-                  this.error = err.message + ' from ' + apiUrl;
-              });
-          this.getMazeImage(this.mazeId)
-      },  
+        log.debug(__filename, 'getMazes()', 'Mounted.');
+        MazeService.GetAllMazes()
+        .then(
+          (mazes) => this.mazes = mazes,
+          (err) => this.$emit('on-error', err),
+        );
+        this.getMazeImage(this.mazeId);
+      },
       components: {
-        //this is the component you can pass data from this, parent, component down to the child component (MazeImage)
-        MazeImage: MazeImage,
-        ActivityMonitor: ActivityMonitor
-      }
+        MazeImage,
+        ActivityMonitor,
+      },
   };
 </script>
 

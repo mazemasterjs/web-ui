@@ -124,8 +124,8 @@
 
 <script>
 
-    import axios from 'axios';
     import Logger from '@mazemasterjs/logger';
+    import MazeService from '../api/MazeService.ts';
 
     // configure logger
     const log = Logger.getInstance();
@@ -144,19 +144,11 @@
         created() {
             log.debug(__filename, 'mounted()', 'Mounted.');
 
-            const apiUrl = process.env.VUE_APP_API_MAZE_URL + '/service';
-            axios
-                .get(apiUrl)
-                .then((res) => {
-                    this.service = res.data;
-
-                    log.debug(__filename, 'mounted().then()', this.service.endpoints.length + ' endpoints returned.');
-                })
-                .catch((err) => {
-                    log.error(__filename, 'mounted().catch()', 'Error ->', err);
-
-                    this.error = err.message + ' from ' + apiUrl;
-                });
+            MazeService.GetServiceDetails()
+            .then(
+                (service) => this.service = service,
+                (err) => this.$emit('on-error', err),
+            );
         },
     };
 </script>

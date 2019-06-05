@@ -1,6 +1,6 @@
 <template>
   <v-container dark>
-    <MazeList/>
+    <MazeList @on-error="onError"/>
   </v-container>
 </template>
 
@@ -11,6 +11,11 @@ export default {
     name: 'MazeListPage',
     components: {
         MazeList,
+    },
+    methods: {
+      onError(err) {
+        this.$emit('on-error', err);
+      },
     },
 };
 </script>
