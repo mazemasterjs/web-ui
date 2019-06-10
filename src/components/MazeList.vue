@@ -61,7 +61,7 @@
       methods: {
         //this method is an api call that's executed when the corresponding maze button in the Maze List is pressed
         getMazeImage(height, width, challenge, seed, mazeName) {
-          console.log('hellooooooo  '+ height + width + challenge + seed + mazeName);
+          console.log('maze stats:  '+ height + width + challenge + seed + mazeName);
 
           MazeService.GenerateMaze(width, height, challenge, mazeName, seed)
           .then(

@@ -19,6 +19,7 @@ Vue.component('maze-list-page', () => import('./page/MazeListPage.vue'));
 Vue.component('service-page', () => import('./page/ServicePage.vue'));
 Vue.component('game-page', () => import('./page/GamePage.vue'));
 Vue.component('debug-page', () => import('./page/DebugPage.vue'));
+Vue.component('team-page', () => import('./page/TeamPage.vue'));
 
 Vue.component('loader', () => import('./components/util/Loader.vue'));
 Vue.component('split-panel', () => import('./components/util/SplitPanel.vue'));
