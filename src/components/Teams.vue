@@ -1,21 +1,26 @@
 <template dark>
     <div>
     <br/>
-    Teams go here!!
-        <template v-for="team in teams">
-            <v-list-tile :key="team.id + '-tile'" im>
-                <v-list-tile-title v-html="team.name"></v-list-tile-title>
-                    <div id=logo>
-                        <img v-bind:src="team.logo"/>
-                    </div>
-            </v-list-tile>
-        </template>
-    <br/>
     Post a team here!
         <input type="text" v-model="teamName" placeholder="name"/>
         <input type="text" v-model="teamLogo" placeholder="logo"/>
         <br/>
         <input type="button" @click="createTeam()" value="submit">
+        <template v-for="team in teams">
+            
+            <v-list-tile :key="team.id + '-tile'" im>
+                
+                <v-list-tile-title v-html="team.name"></v-list-tile-title>
+                    <div id=logo>
+                        <img v-bind:src="team.logo"/>
+                    </div>
+                <button v-on:click="deleteTeam(team.id)">Delete</button>
+               
+            </v-list-tile>
+            
+        </template>
+    <br/>
+  
     </div>
 </template>
 
@@ -43,7 +48,12 @@ export default {
             .then(res => (this.teams = res.data))
             .catch((err) => (console.log(err)))
          },
+
         methods: {
+            deleteTeam(teamId) {
+            axios.delete('http://mazemasterjs.com/api/team/delete/' + teamId)
+            console.log(teamId)
+        },
         async createTeam() {
             try {
                 await axios.put('http://mazemasterjs.com/api/team/insert', {
@@ -58,19 +68,27 @@ export default {
                 console.log(err)
                 console.log(UUID)
             }
-            }
+            },
+        
         },
-        components: {
-        createTeamForm
-      },
 }
 </script>
 
 <style>
-#logo {
-    height: 50px;
+/* #logo {
+    height: 400px;
+    width: auto;
+} */
+
+.v-list__tile {
+    height: 250px;
     width: auto;
 }
+
+input{
+    border: 1.5px solid white;
+}
+
 </style>
 
 
