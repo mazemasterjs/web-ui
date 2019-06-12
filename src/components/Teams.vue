@@ -9,8 +9,14 @@
         <template v-for="team in teams">
             
             <v-list-tile :key="team.id + '-tile'" im>
-                
                 <v-list-tile-title v-html="team.name"></v-list-tile-title>
+                BOTS:
+                 <template v-for="bot in team.bots"> 
+                     <v-list-tile :key="bot.id + '-tile'" im>
+                         <v-list-tile-title v-html="bot.name"></v-list-tile-title>
+                         <v-list-tile-title v-html="bot.coder"></v-list-tile-title>
+                     </v-list-tile>
+                 </template>
                     <div id=logo>
                         <img v-bind:src="team.logo"/>
                     </div>
@@ -42,20 +48,20 @@ export default {
             };
         },
        mounted() {
-        const apiUrl = 'http://mazemasterjs.com/api/team/get';
-        axios
-            .get(apiUrl)
-            .then(res => (this.teams = res.data))
-            .catch((err) => (console.log(err)))
+        this.getTeams()
          },
-
         methods: {
             deleteTeam(teamId) {
             axios.delete('http://mazemasterjs.com/api/team/delete/' + teamId)
-            console.log(teamId)
+            .then(res => (this.getTeams()))
+            .catch((err) => (console.log(err)))
+        },
+        getTeams() {
+            axios.get('http://mazemasterjs.com/api/team/get')
+            .then(res => (this.teams = res.data))
+            .catch((err) => (console.log(err)))
         },
         async createTeam() {
-            try {
                 await axios.put('http://mazemasterjs.com/api/team/insert', {
                     id: uuid.v1(),
                     name: this.teamName,
@@ -63,31 +69,32 @@ export default {
                     bots: [],
                     trophies: [] 
                 })
-
-            } catch(err) {
-                console.log(err)
-                console.log(UUID)
+                .then((res) => {
+                    console.log(res)
+                    this.getTeams()
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
             }
-            },
-        
-        },
+        }
 }
 </script>
 
 <style>
-/* #logo {
-    height: 400px;
-    width: auto;
-} */
 
 .v-list__tile {
     height: 250px;
     width: auto;
+    display: flex;
+    flex-direction: row;
 }
 
 input{
     border: 1.5px solid white;
 }
+
+
 
 </style>
 
