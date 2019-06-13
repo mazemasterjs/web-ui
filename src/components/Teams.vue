@@ -8,8 +8,8 @@
     <input class="button" type="button" @click="createTeam()" value="submit">
     <template v-for="team in teams">
       <v-list-tile :key="team.id + '-tile'" im>
-        <div id="logo" class="teamLogo">
-          <img v-bind:src="team.logo">
+        <div id="logo">
+          <img class="teamLogo" v-bind:src="team.logo">
         </div>
         <v-list-tile-title v-html="team.name"></v-list-tile-title>BOTS:
         <template v-for="bot in team.bots">
@@ -114,7 +114,7 @@
   }
 
   .teamLogo {
-      height: 150px;
-      width: 150px;
+      height: 50px;
+      width: 50px;
   }
 </style>
