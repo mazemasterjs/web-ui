@@ -22,6 +22,8 @@
         <!-- @Siri :: External resource links are unreliable!  Use material.io icons whenever possible: See Chris's post on Trello for samples: https://trello.com/c/YHw9weYI
         When not possible, download resources and store in the /assets folder (or static-content/images repo) and link to them there.-->
         <!-- <button v-on:click="deleteTeam(team.id)"><img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn3.iconfinder.com%2Fdata%2Ficons%2Ftools-solid-icons-vol-2%2F72%2F59-512.png&f=1" style="height: 50px;" alt="Delete team"></button> -->
+
+        <!-- seems like a lot of code to just add a tooltip - what was wrong good-old alt property? ... whatever, here it is -JD -->
         <v-tooltip top>
           <template v-slot:activator="{ on }">
             <v-btn icon v-on="on" v-on:click="deleteTeam(team.id)">
@@ -30,7 +32,7 @@
           </template>
           <span>Delete Team</span>
         </v-tooltip>
-
+      </v-list-tile>
     </template>
     <br>
   </div>
