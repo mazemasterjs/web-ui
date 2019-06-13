@@ -1,32 +1,33 @@
 <template dark>
     <div>
     <br/>
-    Post a team here!
+    <h1>TEAMS</h1>
         <input type="text" v-model="teamName" placeholder="name"/>
         <input type="text" v-model="teamLogo" placeholder="logo"/>
         <br/>
-        <input type="button" @click="createTeam()" value="submit">
+        <input class="button" type="button" @click="createTeam()" value="submit">
         <template v-for="team in teams">
-            
+
             <v-list-tile :key="team.id + '-tile'" im>
+            <div id=logo>
+                <img v-bind:src="team.logo"/>
+            </div>
                 <v-list-tile-title v-html="team.name"></v-list-tile-title>
                 BOTS:
-                 <template v-for="bot in team.bots"> 
+                 <template v-for="bot in team.bots">
                      <v-list-tile :key="bot.id + '-tile'" im>
                          <v-list-tile-title v-html="bot.name"></v-list-tile-title>
                          <v-list-tile-title v-html="bot.coder"></v-list-tile-title>
                      </v-list-tile>
                  </template>
-                    <div id=logo>
-                        <img v-bind:src="team.logo"/>
-                    </div>
-                <button v-on:click="deleteTeam(team.id)">Delete</button>
-               
+
+                <button v-on:click="deleteTeam(team.id)"><img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn3.iconfinder.com%2Fdata%2Ficons%2Ftools-solid-icons-vol-2%2F72%2F59-512.png&f=1" style="height: 50px;" alt="Delete team"></button>
+
             </v-list-tile>
-            
+
         </template>
     <br/>
-  
+
     </div>
 </template>
 
@@ -67,7 +68,7 @@ export default {
                     name: this.teamName,
                     logo: this.teamLogo,
                     bots: [],
-                    trophies: [] 
+                    trophies: []
                 })
                 .then((res) => {
                     console.log(res)
@@ -85,18 +86,21 @@ export default {
 
 .v-list__tile {
     height: 250px;
-    width: auto;
-    display: flex;
-    flex-direction: row;
+    max-width: 500px;
 }
 
 input{
     border: 1.5px solid white;
+    margin: 5px;
 }
 
-
+.button {
+    border: 2px solid black;
+    color: #171717;
+    font-weight: 800;
+    background-color: rgb(65, 181, 161);
+    margin-top: 20px;
+    padding: 10px;
+}
 
 </style>
-
-
-
