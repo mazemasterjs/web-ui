@@ -37,7 +37,6 @@
     <br>
   </div>
 </template>
-
 <script>
   import Vue from 'vue';
   import axios from 'axios';
@@ -54,6 +53,7 @@
               teams: null,
               error: null,
               id: null,
+              dialog: false,
           };
       },
       mounted() {
@@ -61,10 +61,12 @@
       },
       methods: {
           deleteTeam(teamId) {
-              axios
-                  .delete('http://mazemasterjs.com/api/team/delete/' + teamId)
-                  .then((res) => this.getTeams())
-                  .catch((err) => console.log(err));
+              if (confirm('Are you sure?')) {
+                  axios
+                      .delete('http://mazemasterjs.com/api/team/delete/' + teamId)
+                      .then((res) => this.getTeams())
+                      .catch((err) => console.log(err));
+              }
           },
           getTeams() {
               axios
