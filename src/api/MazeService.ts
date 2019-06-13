@@ -1,6 +1,6 @@
 import Service from '@mazemasterjs/shared-library/Service';
 import MazeBase from '@mazemasterjs/shared-library/MazeBase';
-import IMazeStub from '@mazemasterjs/shared-library/IMazeStub';
+import IMazeStub from '@mazemasterjs/shared-library/Interfaces/IMazeStub';
 
 import axios from 'axios';
 import Logger from '@mazemasterjs/logger';
@@ -12,8 +12,7 @@ export default {
     GetServiceDetails(): Promise<Service> {
         const query: string = process.env.VUE_APP_API_MAZE_URL + '/service';
 
-        return axios.get(query)
-        .then(
+        return axios.get(query).then(
             (res) => {
                 log.debug('MazeService.ts', 'GetServiceDetails()', 'Success.');
 
@@ -27,17 +26,27 @@ export default {
             },
         );
     },
-    GenerateMaze(width: number, height: number, difficulty: number, name: string, seed: string): Promise<MazeBase> {
+    GenerateMaze(
+        width: number,
+        height: number,
+        difficulty: number,
+        name: string,
+        seed: string,
+    ): Promise<MazeBase> {
         const query: string =
-        process.env.VUE_APP_API_MAZE_URL + '/generate/' +
-        width + '/' +
-        height + '/' +
-        difficulty + '/' +
-        name + '/' +
-        seed;
+            process.env.VUE_APP_API_MAZE_URL +
+            '/generate/' +
+            width +
+            '/' +
+            height +
+            '/' +
+            difficulty +
+            '/' +
+            name +
+            '/' +
+            seed;
 
-        return axios.get(query)
-        .then(
+        return axios.get(query).then(
             (res) => {
                 log.debug('MazeService.ts', 'GenerateMaze()', 'Success.');
                 const maze: MazeBase = new MazeBase();
@@ -53,8 +62,7 @@ export default {
     GetAllMazes(): Promise<IMazeStub> {
         const query: string = process.env.VUE_APP_API_MAZE_URL + '/get/all';
 
-        return axios.get(query)
-        .then(
+        return axios.get(query).then(
             (res) => {
                 log.debug('MazeService.ts', 'GetAllMazes()', 'Success.');
 

@@ -12,6 +12,9 @@
         "object-literal-sort-keys": false,
         "no-consecutive-blank-lines": false,
         "whitespace": false,
-        "comment-format": false
+        "comment-format": false,
+        "no-bitwise": false,
+        "trailing-comma": false,
+        "semicolon": false
     }
 }
