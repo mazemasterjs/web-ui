@@ -8,7 +8,7 @@
     <input class="button" type="button" @click="createTeam()" value="submit">
     <template v-for="team in teams">
       <v-list-tile :key="team.id + '-tile'" im>
-        <div id="logo">
+        <div id="logo" class="teamLogo">
           <img v-bind:src="team.logo">
         </div>
         <v-list-tile-title v-html="team.name"></v-list-tile-title>BOTS:
@@ -22,10 +22,15 @@
         <!-- @Siri :: External resource links are unreliable!  Use material.io icons whenever possible: See Chris's post on Trello for samples: https://trello.com/c/YHw9weYI
         When not possible, download resources and store in the /assets folder (or static-content/images repo) and link to them there.-->
         <!-- <button v-on:click="deleteTeam(team.id)"><img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn3.iconfinder.com%2Fdata%2Ficons%2Ftools-solid-icons-vol-2%2F72%2F59-512.png&f=1" style="height: 50px;" alt="Delete team"></button> -->
-        <button icon v-on:click="deleteTeam(team.id)">
-          <v-icon>delete</v-icon>
-        </button>
-      </v-list-tile>
+        <v-tooltip top>
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on" v-on:click="deleteTeam(team.id)">
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </template>
+          <span>Delete Team</span>
+        </v-tooltip>
+
     </template>
     <br>
   </div>
@@ -36,6 +41,7 @@
   import axios from 'axios';
   import UUID from 'vue-uuid';
   import { uuid } from 'vue-uuid'; // Import uuid
+
   Vue.use(UUID);
 
   export default {
@@ -67,7 +73,7 @@
           async createTeam() {
               await axios
                   .put('http://mazemasterjs.com/api/team/insert', {
-                      id: uuid.v1(),
+                      id: uuid.v1().replace(/-/g, ''),
                       name: this.teamName,
                       logo: this.teamLogo,
                       bots: [],
@@ -103,5 +109,10 @@
       background-color: rgb(65, 181, 161);
       margin-top: 20px;
       padding: 10px;
+  }
+
+  .teamLogo {
+      height: 150px;
+      width: 150px;
   }
 </style>
