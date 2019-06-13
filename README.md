@@ -6,6 +6,8 @@ MazeMasterJS Web UI
 
 ### v0.4.0
 
+-   added confirm dialog to Teams.vue deleteTeam()
+-   replaced external image resource reference with material icon
 -   added .env.production - this file will be used during build (npm run build) automatically. It MUST ONLY values safe for publishing to the public repo - no passwords, API keys, etc!
 -   updated tslint.config with more vue-friendly rules
 -   added tslint as a dev dependency
