@@ -20,7 +20,7 @@ Vue.component('service-page', () => import('./page/ServicePage.vue'));
 Vue.component('game-page', () => import('./page/GamePage.vue'));
 Vue.component('debug-page', () => import('./page/DebugPage.vue'));
 Vue.component('team-page', () => import('./page/TeamPage.vue'));
-
+Vue.component('bot-editor-page', () => import('./page/BotEditorPage.vue'));
 Vue.component('loader', () => import('./components/util/Loader.vue'));
 Vue.component('split-panel', () => import('./components/util/SplitPanel.vue'));
 
