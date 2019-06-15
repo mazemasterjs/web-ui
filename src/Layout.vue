@@ -1,6 +1,6 @@
 <template>
   <v-app dark class="MazeMasterJS">
-    <!--<v-container>-->
+    <!-- Title bar -->
     <v-toolbar app fixed clipped-left>
       <v-btn icon dark @click.stop="showMenu">
         <v-toolbar-side-icon/>
@@ -8,6 +8,7 @@
       <v-toolbar-title class="headline text-uppercase">MazeMasterJS - Code Camp 2019</v-toolbar-title>
     </v-toolbar>
 
+    <!-- Left-nav menu -->
     <v-navigation-drawer v-model="menuVisible" fixed dark temporary>
       <v-list>
         <v-list-tile avatar tag="div" @click.stop="hideMenu">
@@ -82,7 +83,18 @@
     </v-navigation-drawer>
 
     <v-content>
-      <v-alert dismissible :value="errorMessage" type="error">{{ errorMessage }}</v-alert>
+      <!-- Display any error messages at the top -->
+      <v-alert
+        v-for="error in errors"
+        :key = "error.id"
+        dismissible
+        type="error"
+        :value="true"
+      >
+        {{ error.message }}
+      </v-alert>
+
+      <!-- Display the page -->
       <component
         :is="currentPage"
         v-if="currentPage"
@@ -91,41 +103,56 @@
         class="MainContent"
       />
     </v-content>
-    <!--</v-container>-->
   </v-app>
 </template>
 
 <script>
   export default {
-      name: 'Layout',
-      components: {},
-      data() {
-          return {
-              menuVisible: null,
-              currentPage: 'home-page',
-              errorMessage: null,
-          };
+    name: 'Layout',
+    components: {},
+    data() {
+      return {
+        menuVisible: null,
+        currentPage: 'home-page',
+        errors: [],
+        nextErrorId: 0,
+      };
+    },
+    methods: {
+      showMenu() {
+        this.menuVisible = true;
       },
-      methods: {
-          showMenu() {
-              this.menuVisible = true;
-          },
-          hideMenu() {
-              this.menuVisible = false;
-          },
-          menuNavigate(page) {
-              this.menuVisible = false;
-              this.navigate(page);
-          },
+      hideMenu() {
+        this.menuVisible = false;
+      },
+      menuNavigate(page) {
+        this.menuVisible = false;
+        this.navigate(page);
+      },
 
-          // Event handlers
-          navigate(page) {
-              this.currentPage = page;
-          },
-          onError(error) {
-              this.errorMessage = error;
-          },
+      // Event handlers
+      navigate(page) {
+        if (page != this.currentPage) {
+          this.currentPage = page;
+          this.errors = [];
+        }
       },
+      onError(error) {
+        this.errors.push(this.makeError(error));
+      },
+
+      // Error handling
+      makeError(message) {
+        let error = {
+          id: this.nextErrorId,
+          message: message,
+        };
+
+        this.nextErrorId++;
+
+        return error;
+      },
+    },
   };
 </script>
 
