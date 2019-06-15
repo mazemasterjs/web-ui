@@ -1,5 +1,5 @@
 <template dark>
-  <div>
+  <div class="Teams">
     <br>
     <h1>TEAMS</h1>
     <input type="text" v-model="teamName" placeholder="name">
@@ -95,28 +95,30 @@
   };
 </script>
 
-<style>
-  .v-list__tile {
-      height: 250px;
-      max-width: 500px;
-  }
+<style lang="scss">
+  .Teams {
+    .v-list__tile {
+        height: 250px;
+        max-width: 500px;
+    }
 
-  input {
-      border: 1.5px solid white;
-      margin: 5px;
-  }
+    input {
+        border: 1.5px solid white;
+        margin: 5px;
+    }
 
-  .button {
-      border: 2px solid black;
-      color: #171717;
-      font-weight: 800;
-      background-color: rgb(65, 181, 161);
-      margin-top: 20px;
-      padding: 10px;
-  }
+    .button {
+        border: 2px solid black;
+        color: #171717;
+        font-weight: 800;
+        background-color: rgb(65, 181, 161);
+        margin-top: 20px;
+        padding: 10px;
+    }
 
-  .teamLogo {
-      height: 50px;
-      width: 50px;
+    .teamLogo {
+        height: 50px;
+        width: 50px;
+    }
   }
 </style>

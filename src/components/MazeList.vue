@@ -1,5 +1,5 @@
 <template dark>
-  <div class="content">
+  <div class="MazeList content">
     <h2>{{title}}</h2>
     <v-list v-if="error === ''" two-line>
 <div class="dropdown">
@@ -86,53 +86,55 @@
   };
 </script>
 
-<style>
-  .content {
-      margin: auto;
-      border: solid 1px darkslategray;
+<style lang="scss">
+  .MazeList {
+    .content {
+        margin: auto;
+        border: solid 1px darkslategray;
+    }
+
+    .testing {
+        border: solid 1px green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .mazeThumbnail {
+        border: solid 1px red;
+        flex-shrink: 0;
+        height: 100%;
+        width: 100%;
+        /*    font-size: calc(0vw + 0vh + 1vmin); */
+    }
+
+    /* Dropdown Button */
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
   }
 
-  .testing {
-      border: solid 1px green;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
   }
 
-  .mazeThumbnail {
-      border: solid 1px red;
-      flex-shrink: 0;
-      height: 100%;
-      width: 100%;
-      /*    font-size: calc(0vw + 0vh + 1vmin); */
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;}
+
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+
+  #mazeContainer{
+    display: flex;
+    justify-content: space-around;
   }
-
-  /* Dropdown Button */
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {display: block;}
-
-#mazeContainer{
-  display: flex;
-  justify-content: space-around;
 }
 
 </style>
