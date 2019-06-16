@@ -15,6 +15,7 @@
         "comment-format": false,
         "no-bitwise": false,
         "trailing-comma": false,
-        "semicolon": false
+        "semicolon": false,
+        "no-console": true
     }
 }
